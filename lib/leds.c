@@ -4,7 +4,7 @@
 
 int counter = 0;
 
-char leds [4];
+char leds[4];
 
 void init_led() {
   int i; 
