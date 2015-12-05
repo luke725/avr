@@ -13,6 +13,9 @@ struct time_t time;
 ISR(TIMER0_OVF_vect) {
   TCNT0 += 6;
   add_ms(&time, 2);
+  if (bit_is_clear(PINC, 4)) {
+    init_time(&time);
+  }
   display_next_led();
 }
 
@@ -33,8 +36,12 @@ void display_time(struct time_t * time) {
 
 int main() {
   init_time(&time);
+  DDRC &= 0xC0;
   DDRC |= 0x0F;
+  PORTC &= 0xC0;
+  PORTC |= 0x3F;
   DDRD = 0xFF;
+  PORTD = 0xFF;
   init_led();
   init_timer();
   while (1) {

@@ -27,7 +27,8 @@ void set_bit(int n, char bit) {
 }
 
 void set_port_c(int i) {
-  PORTC = (PORTC & 0xF0) | (0x0F - (1 << i));
+  PORTC &= 0xF0;
+  PORTC |= 0x0F & (0x0F - (1 << i));
 }
 
 void display_next_led() {

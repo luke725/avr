@@ -1,3 +1,5 @@
+all: main.hex
+
 %.o: %.c
 	avr-gcc -g -Os -mmcu=atmega8 -c $< -o $@
 
